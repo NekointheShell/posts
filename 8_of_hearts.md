@@ -7,11 +7,13 @@ The 8 of Hearts challeng eprovided the player with an ELF binary and a file appe
 
 
 First thing's first, we run "file" on the files, as one does.
+
 ![8_of_hearts.elf: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=7d5bfd0b09ae02541c080fa39673f5c0edc19f59, for GNU/Linux 3.2.0, not stripped
 8_of_hearts.enc: data](images/8_of_hearts/runningfile.png)
 
 
 Now, we run "strings".
+
 ![buffalo
 You did not say buffalo!
 8_of_hearts.enc
@@ -26,6 +28,7 @@ __do_global_dtors_aux](images/8_of_hearts/runningstrings.png)
 
 Okay, we see it does something with 8_of_hearts.enc and 8_of_hearts.png. We also see it likes "buffalo".
 Let's just run it and see what happens.
+
 ![kali@kali:~/metasploitctf$ ./8_of_hearts.elf 
 
 You did not say buffalo!
@@ -36,6 +39,7 @@ MOAR buffalo!](images/8_of_hearts/running8_of_hearts.png)
 
 
 Okay, let's look at it with "objdump" using the "-d" or "--disassemble" flag.
+
 ![0000000000001229 <main>:
     1229:       f3 0f 1e fa             endbr64 
     122d:       55                      push   %rbp
@@ -132,6 +136,7 @@ Just from that bit of info, we can surmise that the structure of the program is 
 
 
 Loading this into gdb and running it, we see our address space is different, but the layout is the same.
+
 ![(gdb) disassemble main
 Dump of assembler code for function main:
    0x0000555555555229 <+0>:     endbr64 
@@ -223,12 +228,14 @@ End of assembler dump.
 
 
 From here, we can set a breakpoint at the fgets call.
+
 ![(gdb) break *0x0000555555555287
 Breakpoint 1 at 0x555555555287
 ](images/8_of_hearts/runninggdbbreak.png)
 
 
 Now we can run the program again, and catch it at the breakpoint.
+
 ![(gdb) run
 Starting program: /home/kali/metasploitctf/8_of_hearts.elf 
 
@@ -236,6 +243,7 @@ Breakpoint 1, 0x0000555555555287 in main ()](images/8_of_hearts/rungdbrun.png)
 
 
 Finally, we jump all the way over both "strncmp"s to right after the second one's "jne" (jump not equal) instruction.
+
 ![(gdb) jump *0x00005555555552f3
 Continuing at 0x5555555552f3.
 \[Inferior 1 (process 82421) exited normally\]
@@ -243,4 +251,5 @@ Continuing at 0x5555555552f3.
 
 
 Great! it exited cleanly. Now we can run "ls" and see that it did create "8_of_hearts.png".
+
 ![8_of_hearts.png flag with the metasploit banner "I heart shells"](images/8_of_hearts/8_of_hearts.png)
