@@ -1,3 +1,10 @@
+- title: 8 of Hearts
+  text: Metasploit 2020 CTF - 8 of Hearts writeup.
+  date: 2022-01-31
+  link: 8_of_hearts
+  file: 8_of_hearts.md
+
+
 - title: whoami
   github: https://github.com/NekointheShell
   text: This is an introductory post for my website, just to make sure everything's working.
