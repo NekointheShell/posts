@@ -30,9 +30,7 @@ Okay, we see it does something with 8_of_hearts.enc and 8_of_hearts.png. We also
 Let's just run it and see what happens.
 
 ![kali@kali:~/metasploitctf$ ./8_of_hearts.elf 
-
 You did not say buffalo!
-
 kali@kali:~/metasploitctf$ ./8_of_hearts.elf 
 buffalo
 MOAR buffalo!](images/8_of_hearts/running8_of_hearts.png)
@@ -238,7 +236,6 @@ Now we can run the program again, and catch it at the breakpoint.
 
 ![(gdb) run
 Starting program: /home/kali/metasploitctf/8_of_hearts.elf 
-
 Breakpoint 1, 0x0000555555555287 in main ()](images/8_of_hearts/rungdbrun.png)
 
 
