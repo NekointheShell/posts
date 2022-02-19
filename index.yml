@@ -1,3 +1,10 @@
+- title: Exploiting Shellshock
+  text: In this tutorial, we walk through exploiting shellshock via Apache's Mod_CGI.
+  date: 2022-02-19
+  link: shellshock
+  file: shellshock.md
+
+
 - title: Cracking Wifi with Aircrack-ng
   text: In this tutorial, we cover how to attack Wifi networks using Aircrack-ng and deauth attacks.
   date: 2022-02-12
